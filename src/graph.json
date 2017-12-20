@@ -1,0 +1,23 @@
+{
+
+  "main": {
+    "type": "graph",
+    "nodes": {"CodeView": "CodeView", "GraphEditor": "GraphEditor"},
+    "entryPoints": {"start": {"target": "CodeView", "entryPoint": "start"}},
+    "arrows": {
+      "CodeView": {
+        "CodeLoaded": {"target": "GraphEditor", "entryPoint": "start"},
+        "CodeChanged": {"target": "CodeView", "entryPoint": "recent"}
+      }
+    }
+  },
+
+  "CodeView": {
+    "type": "leaf"
+  },
+
+  "GraphEditor": {
+    "type": "leaf"
+  }
+
+}
