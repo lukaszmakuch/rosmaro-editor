@@ -1,0 +1,28 @@
+{
+  "name": "rosmaro-online-editor",
+  "version": "0.0.1",
+  "description": "A visual editor for Rosmaro",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --config webpack.prod.js",
+    "start": "npx webpack --watch --config webpack.dev.js"
+  },
+  "author": "Łukasz Makuch",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "uglifyjs-webpack-plugin": "^1.1.4",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
+  },
+  "dependencies": {
+    "cytoscape": "^3.2.7",
+    "rosmaro": "^0.1.2-beta",
+    "rosmaro-in-memory-storage": "^1.0.0",
+    "rosmaro-process-wide-lock": "^1.0.0"
+  }
+}

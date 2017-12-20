@@ -1,0 +1,8 @@
+{
+  "presets": [["env", {
+    "targets": {
+      "browsers": ["last 2 versions"]
+    }
+  }]],
+  "plugins": ["syntax-object-rest-spread", "transform-object-rest-spread"]
+}
