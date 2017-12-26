@@ -2,21 +2,219 @@
 
   "main": {
     "type": "graph",
-    "nodes": {"CodeView": "CodeView", "GraphEditor": "GraphEditor"},
-    "entryPoints": {"start": {"target": "CodeView", "entryPoint": "start"}},
+    "nodes": {
+      "SourceView": "SourceView", 
+      "Editor": "Editor"
+    },
+    "entryPoints": {
+      "start": {"target": "SourceView", "entryPoint": "start"}
+    },
     "arrows": {
-      "CodeView": {
-        "CodeLoaded": {"target": "GraphEditor", "entryPoint": "start"},
-        "CodeChanged": {"target": "CodeView", "entryPoint": "recent"}
+      "SourceView": {
+        "codeOpened": {"target": "Editor", "entryPoint": "start"},
+        "codeEdited": {"target": "SourceView", "entryPoint": "start"}
       }
     }
   },
 
-  "CodeView": {
+  "SourceView": {
     "type": "leaf"
   },
 
-  "GraphEditor": {
+  "Editor": {
+    "type": "graph",
+    "nodes": {
+      "InitializingGraph": "InitializingGraph",
+      "NoNodeSelected": "NoNodeSelected",
+      "EditingGraph": "EditingGraph"
+    },
+    "entryPoints": {
+      "start": {"target": "InitializingGraph", "entryPoint": "start"}
+    },
+    "arrows": {
+
+      "InitializingGraph": {
+        "graphViewIsReady": {"target": "NoNodeSelected", "entryPoint": "start"}
+      },
+
+      "NoNodeSelected": {
+        "openedGraph": {"target": "EditingGraph", "entryPoint": "start"}
+      },
+
+      "EditingGraph": {
+        "openedGraph": {"target": "EditingGraph", "entryPoint": "start"}
+      }
+
+    }
+  },
+
+  "EditingGraph": {
+    "type": "graph",
+    "nodes": {
+      "EditingGraphItself": "EditingGraphItself",
+      "EditingGraphNode": "EditingGraphNode",
+      "EditingEdgeBetweenNodes": "EditingEdgeBetweenNodes",
+      "EditingEntryPointEdge": "EditingEntryPointEdge"
+    },
+    "entryPoints": {
+      "start": {"target": "EditingGraphItself", "entryPoint": "start"},
+      "history": {"target": "recent", "entryPoint": "history"}
+    },
+    "arrows": {
+
+      "EditingGraphItself": {
+        "clickedGraphNode": {"target": "EditingGraphNode", "entryPoint": "start"},
+        "clickedBackground": {"target": "EditingGraphItself", "entryPoint": "history"},
+        "clickedEdgeBetweenNodes": {"target": "EditingEdgeBetweenNodes", "entryPoint": "start"},
+        "clickedEntryPointEdge": {"target": "EditingEntryPointEdge", "entryPoint": "start"}
+      },
+
+      "EditingGraphNode": {
+        "clickedGraphNode": {"target": "EditingGraphNode", "entryPoint": "start"},
+        "setNewNodeName": {"target": "EditingGraphNode", "entryPoint": "history"},
+        "changedUnderlayingNode": {"target": "EditingGraphNode", "entryPoint": "history"},
+        "removedGraphNode": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedBackground": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedEdgeBetweenNodes": {"target": "EditingEdgeBetweenNodes", "entryPoint": "history"},
+        "clickedEntryPointEdge": {"target": "EditingEntryPointEdge", "entryPoint": "start"}
+      },
+
+      "EditingEdgeBetweenNodes": {
+        "clickedGraphNode": {"target": "EditingGraphNode", "entryPoint": "start"},
+        "clickedBackground": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedEdgeBetweenNodes": {"target": "EditingEdgeBetweenNodes", "entryPoint": "history"},
+        "changedEdgeName": {"target": "EditingEdgeBetweenNodes", "entryPoint": "history"},
+        "changedEdgeEntryPoint": {"target": "EditingEdgeBetweenNodes", "entryPoint": "history"},
+        "removedEdge": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedEntryPointEdge": {"target": "EditingEntryPointEdge", "entryPoint": "start"}
+      },
+
+      "EditingEntryPointEdge": {
+        "clickedGraphNode": {"target": "EditingGraphNode", "entryPoint": "start"},
+        "clickedBackground": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedEdgeBetweenNodes": {"target": "EditingEdgeBetweenNodes", "entryPoint": "start"},
+        "changedEdgeEntryPoint": {"target": "EditingEntryPointEdge", "entryPoint": "history"},
+        "removedEdge": {"target": "EditingGraphItself", "entryPoint": "start"},
+        "clickedEntryPointEdge": {"target": "EditingEntryPointEdge", "entryPoint": "history"}
+      }
+    }
+  },
+
+  "EditingGraphItself": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "ListOfNodes",
+      "toolbar": "GraphToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "GraphToolbar": {
+    "type": "graph",
+    "entryPoints": {
+      "start": {"target": "ChangeGraphNameToolbar", "entryPoint": "start"},
+      "history": {"target": "recent", "entryPoint": "history"}
+    },
+    "nodes": {
+      "ChangeGraphNameToolbar": "ChangeGraphNameToolbar",
+      "NewChildNodeToolbar": "NewChildNodeToolbar",
+      "NewEntryPointToolbar": "NewEntryPointToolbar"
+    },
+    "arrows": {
+      "ChangeGraphNameToolbar": {
+        "changedNodeName": {"target": "ChangeGraphNameToolbar", "entryPoint": "history"},
+        "addingChildNodeBegan": {"target": "NewChildNodeToolbar", "entryPoint": "start"},
+        "addingEntryPointBegan": {"target": "NewEntryPointToolbar", "entryPoint": "start"}
+      },
+      "NewChildNodeToolbar": {
+        "typed": {"target": "NewChildNodeToolbar", "entryPoint": "history"},
+        "canceled": {"target": "ChangeGraphNameToolbar", "entryPoint": "start"},
+        "added": {"target": "ChangeGraphNameToolbar", "entryPoint": "start"}
+      },
+      "NewEntryPointToolbar": {
+        "typed": {"target": "NewEntryPointToolbar", "entryPoint": "history"},
+        "canceled": {"target": "ChangeGraphNameToolbar", "entryPoint": "start"},
+        "added": {"target": "ChangeGraphNameToolbar", "entryPoint": "start"}
+      }
+    }
+  },
+
+  "ChangeGraphNameToolbar": {"type": "leaf"},
+
+  "NewChildNodeToolbar": {"type": "leaf"},
+
+  "NewEntryPointToolbar": {"type": "leaf"},
+
+  "EditingEdgeBetweenNodes": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "ListOfNodes",
+      "toolbar": "EdgeBetweenNodesToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "EdgeBetweenNodesToolbar": {
+    "type": "leaf"
+  },
+
+  "EditingEntryPointEdge": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "ListOfNodes",
+      "toolbar": "EntryPointEdgeToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "EntryPointEdgeToolbar": {
+    "type": "leaf"
+  },
+
+  "EditingGraphNode": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "ListOfNodes",
+      "toolbar": "GraphNodeToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "GraphNodeToolbar": {
+    "type": "leaf"
+  },
+
+  "InitializingGraph": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "InitializingListOfNodes",
+      "toolbar": "InitializingToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "InitializingListOfNodes": {"type": "leaf"},
+
+  "InitializingToolbar": {"type": "leaf"},
+
+  "NoNodeSelected": {
+    "type": "composite",
+    "nodes": {
+      "nodeList": "ListOfNodes",
+      "toolbar": "InactiveToolbar",
+      "graphView": "GraphView"
+    }
+  },
+
+  "ListOfNodes": {
+    "type": "leaf"
+  },
+
+  "InactiveToolbar": {
+    "type": "leaf"
+  },
+
+  "GraphView": {
     "type": "leaf"
   }
 

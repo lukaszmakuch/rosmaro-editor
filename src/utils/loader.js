@@ -17,7 +17,7 @@ const buildChildren = (
   return children.reduce((builtSoFar, child) => {
     if (alreadyBuilt(builtSoFar, child)) return builtSoFar;
 
-    return mergeRes(builtSoFar, fromJson(
+    return mergeRes(builtSoFar, fromJsonInnerFn(
       json,
       getId,
       child,
@@ -26,11 +26,32 @@ const buildChildren = (
   }, builtSoFar);
 };
 
-export const fromJson = (
+const stringifyData = graph => {
+  if (!graph.data) {
+    return graph;
+  }
+
+  return {
+    ...graph,
+    data: JSON.stringify(graph.data)
+  }
+}
+
+export const fromJson = (json, getId) => {
+  const {graph} = fromJsonInnerFn(json, getId);
+
+  return Object.keys(graph).reduce((soFar, id) => ({
+    ...soFar,
+    [id]: stringifyData(graph[id])
+  }), {});
+
+};
+
+const fromJsonInnerFn = (
   json,
   getId,
   node = 'main',
-  builtSoFar = {graph: {}, ids: {}},
+  builtSoFar = {graph: {}, ids: {}}
 ) => {
   const nodeJson = json[node];
 
@@ -73,6 +94,8 @@ export const fromJson = (
       }
     }), {});
 
+    const specialRecentNodeId = getId();
+
     return mergeRes(builtChildren, {
       graph: {
         [id]: {
@@ -83,10 +106,24 @@ export const fromJson = (
             //nodes
             ...Object.values(localChildren),
 
+            //special "recent" node
+            {
+              group: 'nodes',
+              data: {
+                id: specialRecentNodeId,
+                name: 'recent',
+              },
+              classes: 'recent-node'
+            },
+
             //entry points
             ...flatten(Object.keys(nodeJson.entryPoints).map(point => {
               const entryPointId = getId();
               const pointData = nodeJson.entryPoints[point];
+              const targetId = pointData.target === 'recent'
+                ? specialRecentNodeId
+                : localChildren[pointData.target].data.id;
+
               return [
                 {
                   group: 'nodes',
@@ -101,10 +138,11 @@ export const fromJson = (
                   data: {
                     id: getId(),
                     source: entryPointId,
-                    target: localChildren[pointData.target].data.id,
+                    target: targetId,
                     entryPoint: pointData.entryPoint,
                     displayName: ":" + pointData.entryPoint
-                  }
+                  },
+                  classes: 'actual-edge'
                 },
               ];
             })),
@@ -117,10 +155,11 @@ export const fromJson = (
                   id: getId(),
                   source: localChildren[arrowSrc].data.id,
                   target: localChildren[nodeJson.arrows[arrowSrc][arrowName].target].data.id,
-                  entryPoint: nodeJson.arrows[arrowSrc][arrowName].entryPoint,
                   name: arrowName,
+                  entryPoint: nodeJson.arrows[arrowSrc][arrowName].entryPoint,
                   displayName: arrowName + ":" + nodeJson.arrows[arrowSrc][arrowName].entryPoint
-                }
+                },
+                classes: 'actual-edge'
               }))
             ))
 

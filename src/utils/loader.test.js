@@ -5,9 +5,9 @@ const idGenerator = () => {
   return () => "id" + nextId++;
 };
 
-describe('loader', () => {
+const stringify = obj => JSON.stringify(obj);
 
-  
+describe('loader', () => {
 
   describe('to JSON', () => {
 
@@ -24,7 +24,8 @@ describe('loader', () => {
             }
           },
           entryPoints: {
-            start: {target: 'A', entryPoint: 'start'}
+            start: {target: 'A', entryPoint: 'start'},
+            history: {target: 'recent', entryPoint: 'start'}
           }
         },
 
@@ -61,15 +62,15 @@ describe('loader', () => {
 
       const editorFormat = {
         
-        'id14': {
+        'id15': {
           name: 'main',
           type: 'graph',
-          data: [
+          data: stringify([
 
             {
               group: 'nodes',
               data: {
-                id: 'id15',
+                id: 'id16',
                 name: 'A',
                 link: 'id0',
               },
@@ -79,9 +80,9 @@ describe('loader', () => {
             {
               group: 'nodes',
               data: {
-                id: 'id16',
+                id: 'id17',
                 name: 'B',
-                link: 'id11',
+                link: 'id12',
               },
               classes: 'actual-node'
             },
@@ -89,7 +90,16 @@ describe('loader', () => {
             {
               group: 'nodes',
               data: {
-                id: 'id17',
+                id: 'id18',
+                name: 'recent'
+              },
+              classes: 'recent-node'
+            },
+
+            {
+              group: 'nodes',
+              data: {
+                id: 'id19',
                 name: 'start'
               },
               classes: 'entry-point'
@@ -98,27 +108,50 @@ describe('loader', () => {
             {
               group: 'edges',
               data: {
-                id: 'id18',
-                source: 'id17',
-                target: 'id15',
+                id: 'id20',
+                source: 'id19',
+                target: 'id16',
                 entryPoint: 'start',
                 displayName: ':start'
-              }
+              },
+              classes: 'actual-edge'
+            },
+
+            {
+              group: 'nodes',
+              data: {
+                id: 'id21',
+                name: 'history',
+              },
+              classes: 'entry-point'
             },
 
             {
               group: 'edges',
               data: {
-                id: 'id19',
-                source: 'id15',
-                target: 'id16',
+                id: 'id22',
+                source: 'id21',
+                target: 'id18',
+                entryPoint: 'start',
+                displayName: ':start',
+              },
+              classes: 'actual-edge'
+            },
+
+            {
+              group: 'edges',
+              data: {
+                id: 'id23',
+                source: 'id16',
+                target: 'id17',
                 name: 'x',
                 entryPoint: 'p',
                 displayName: 'x:p'
-              }
+              },
+              classes: 'actual-edge'
             },
 
-          ]
+          ])
 
         },
 
@@ -127,15 +160,15 @@ describe('loader', () => {
           type: 'leaf'
         },
 
-        'id11': {
+        'id12': {
           name: 'B',
           type: 'composite',
-          data: [
+          data: stringify([
 
             {
               group: 'nodes',
               data: {
-                id: 'id12',
+                id: 'id13',
                 name: 'A',
                 link: 'id3',
               },
@@ -145,20 +178,20 @@ describe('loader', () => {
             {
               group: 'nodes',
               data: {
-                id: 'id13',
+                id: 'id14',
                 name: 'B',
                 link: 'id3',
               },
               classes: 'actual-node'
             },
 
-          ]
+          ])
         },
 
         'id3': {
           name: 'BSub',
           type: 'graph',
-          data: [
+          data: stringify([
 
             {
               group: 'nodes',
@@ -181,9 +214,18 @@ describe('loader', () => {
             },
 
             {
+              group:"nodes",
+              data:{
+                id: "id6",
+                name: "recent"
+              },
+              classes: "recent-node"
+            },
+
+            {
               group: 'nodes',
               data: {
-                id: 'id6',
+                id: 'id7',
                 name: 'start'
               },
               classes: 'entry-point'
@@ -192,18 +234,19 @@ describe('loader', () => {
             {
               group: 'edges',
               data: {
-                id: 'id7',
-                source: 'id6',
+                id: 'id8',
+                source: 'id7',
                 target: 'id4',
                 entryPoint: 'start',
                 displayName: ':start'
-              }
+              },
+              classes: 'actual-edge'
             },
 
             {
               group: 'nodes',
               data: {
-                id: 'id8',
+                id: 'id9',
                 name: 'p'
               },
               classes: 'entry-point'
@@ -212,27 +255,29 @@ describe('loader', () => {
             {
               group: 'edges',
               data: {
-                id: 'id9',
-                source: 'id8',
+                id: 'id10',
+                source: 'id9',
                 target: 'id5',
                 entryPoint: 'start',
                 displayName: ':start'
-              }
+              },
+              classes: 'actual-edge'
             },
 
             {
               group: 'edges',
               data: {
-                id: 'id10',
+                id: 'id11',
                 source: 'id4',
                 target: 'id5',
                 name: 'x',
                 entryPoint: 'start',
                 displayName: 'x:start'
-              }
+              },
+              classes: 'actual-edge'
             },
 
-          ]
+          ])
         },
 
         'id1': {
@@ -247,7 +292,7 @@ describe('loader', () => {
 
       };
 
-      const result = fromJson(rosmaroFormat, idGenerator()).graph;
+      const result = fromJson(rosmaroFormat, idGenerator());
       expect(result).toEqual(editorFormat);
     });
 
