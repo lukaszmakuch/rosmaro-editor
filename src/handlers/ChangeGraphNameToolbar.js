@@ -1,32 +1,24 @@
 const h = require('snabbdom/h').default;
+import {
+  changeOpenedNodeName,
+  removeNode,
+  nodeNameInput,
+  removeNodeButton
+} from './nodeToolbarUtils';
 
-const openedNodeName = ctx => 
-  (ctx.loadedGraph[ctx.openedNode] || {}).name || ""
+export default (data) => ({
 
-export default () => ({
+  changeOpenedNodeName,
 
-  changeOpenedNodeName: ({ctx, newName}) => {
-    const newCtx = {
-      ...ctx,
-      loadedGraph: {
-        ...ctx.loadedGraph,
-        [ctx.openedNode]: {
-          ...ctx.loadedGraph[ctx.openedNode],
-          name: newName
-        }
-      }
-    };
-    return {ctx: newCtx, arrow: 'changedNodeName'};
-  },
+  removeNode: removeNode(data),
+
+  addChildNode: () => ({arrow: 'addingChildNodeBegan'}),
+
+  addEntryPoint: () => ({arrow: 'addingEntryPointBegan'}),
 
   render: ({ctx, thisModel}) => [
 
-    h('input', {
-      props: {type: 'text', value: openedNodeName(ctx)},
-      on: {input: e => thisModel.changeOpenedNodeName({
-        newName: e.target.value
-      })}
-    }),
+    nodeNameInput({thisModel, ctx}),
 
     h('input', {
       props: {type: 'button', value: 'new node'},
@@ -38,6 +30,7 @@ export default () => ({
       on: {click: e => thisModel.addEntryPoint()}
     }),
 
+    removeNodeButton({thisModel})
 
   ]
 

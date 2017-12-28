@@ -1,11 +1,6 @@
 const h = require('snabbdom/h').default;
-import cytoscapeConfig from './../cytoscapeConfig';
-import {getAllNodes} from './utils';
+import {getAllNodes, runLayout} from './utils';
 import cloneDeep from 'lodash/cloneDeep';
-
-const runLayout = cy => {
-  cy.layout(cytoscapeConfig.layout).run();
-};
 
 export default (data) => ({
 
@@ -17,7 +12,8 @@ export default (data) => ({
       'composite': 'openedComposite'
     })[selectedNodeType];
 
-    const graphToLoad = JSON.parse(ctx.loadedGraph[nodeId].data);
+    data.cy.$('*').remove();
+    const graphToLoad = JSON.parse(ctx.loadedGraph[nodeId].data || '[]');
     data.cy.json({elements: graphToLoad});
     runLayout(data.cy);
 
@@ -26,6 +22,11 @@ export default (data) => ({
       ctx: {...ctx, openedNode: nodeId}
     };
   },
+
+  startAddingNewNode: ({ctx}) => ({
+    arrow: 'started adding node',
+    ctx: {...ctx, openedNode: undefined}
+  }),
 
   render: ({ctx, thisModel}) => [
     h('span.header', {}, 'Model nodes'),
@@ -39,7 +40,9 @@ export default (data) => ({
         name
       )
     )),
-    h('button.ctrl-button', {}, 'add')
+    h('button.ctrl-button', {
+      on: {click: () => thisModel.startAddingNewNode()}
+    }, 'add')
   ]
 
 });

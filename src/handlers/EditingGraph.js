@@ -1,4 +1,3 @@
-
-export default (data) => ({
-
+export default () => ({
+  afterRender: ({UI}) => UI
 });

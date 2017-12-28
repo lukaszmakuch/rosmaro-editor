@@ -112,7 +112,7 @@ describe('loader', () => {
                 source: 'id19',
                 target: 'id16',
                 entryPoint: 'start',
-                displayName: ':start'
+                displayName: ': start'
               },
               classes: 'actual-edge'
             },
@@ -133,7 +133,7 @@ describe('loader', () => {
                 source: 'id21',
                 target: 'id18',
                 entryPoint: 'start',
-                displayName: ':start',
+                displayName: ': start',
               },
               classes: 'actual-edge'
             },
@@ -146,7 +146,7 @@ describe('loader', () => {
                 target: 'id17',
                 name: 'x',
                 entryPoint: 'p',
-                displayName: 'x:p'
+                displayName: 'x : p'
               },
               classes: 'actual-edge'
             },
@@ -214,8 +214,8 @@ describe('loader', () => {
             },
 
             {
-              group:"nodes",
-              data:{
+              group: "nodes",
+              data: {
                 id: "id6",
                 name: "recent"
               },
@@ -238,7 +238,7 @@ describe('loader', () => {
                 source: 'id7',
                 target: 'id4',
                 entryPoint: 'start',
-                displayName: ':start'
+                displayName: ': start'
               },
               classes: 'actual-edge'
             },
@@ -259,7 +259,7 @@ describe('loader', () => {
                 source: 'id9',
                 target: 'id5',
                 entryPoint: 'start',
-                displayName: ':start'
+                displayName: ': start'
               },
               classes: 'actual-edge'
             },
@@ -272,7 +272,7 @@ describe('loader', () => {
                 target: 'id5',
                 name: 'x',
                 entryPoint: 'start',
-                displayName: 'x:start'
+                displayName: 'x : start'
               },
               classes: 'actual-edge'
             },

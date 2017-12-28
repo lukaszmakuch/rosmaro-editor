@@ -34,6 +34,26 @@ export default {
     },
 
     {
+      selector: '.entry-point, .recent-node',
+      style: {
+        'width': 'label',
+        'min-width': 100,
+        'height': 'label',
+        'padding': 10,
+        'text-halign': 'center',
+        'text-valign': 'center',
+        'shape': 'ellipse',
+        'border-color': '#000',
+        'border-width': 10,
+        'color': '#fff',
+        'border-style': 'double',
+        'background-color': '#000',
+        'label': 'data(name)'
+      }
+
+    },
+
+    {
       selector: '.eh-handle',
       style: {
         'width': 10,

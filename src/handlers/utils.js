@@ -1,3 +1,5 @@
+import cytoscapeConfig from './../cytoscapeConfig';
+
 export const getAllNodes = ctx => {
   return Object.keys(ctx.loadedGraph)
     .map(nodeId => ({
@@ -12,7 +14,7 @@ export const selectedGraphNodeData = ({ctx, data}) => {
 
 const readGraphDataFromView = (cy) => {
   return cy
-    .$('.actual-node, .actual-edge, .entry-point')
+    .$('.actual-node, .actual-edge, .entry-point, .recent-node')
     .jsons()
     .map(({group, data, classes}) => ({group, data, classes}));
 };
@@ -30,6 +32,10 @@ export const updateCtxBasedOnView = (ctx, cy) => {
     }
   };
   return newCtx;
+};
+
+export const runLayout = cy => {
+  cy.layout(cytoscapeConfig.layout).run();
 };
 
 export const getEdge = ({ctx, data}) => 

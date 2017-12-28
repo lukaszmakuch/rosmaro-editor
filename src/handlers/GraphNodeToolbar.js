@@ -50,12 +50,18 @@ export default (data) => ({
           {on: {change: e => thisModel.changeUnderlayingNode({
               newUnderlayingNodeId: e.target.value
           })}},
-          getAllNodes(ctx).map(({name, id}) => h('option', {
-            props: {
-              value: id,
-              selected: nodeData.link === id
-            }
-          }, name))
+          [
+            h('option', {props: {
+              value: undefined,
+              selected: !ctx.loadedGraph[nodeData.link]
+            }}, 'None'),
+            ...getAllNodes(ctx).map(({name, id}) => h('option', {
+              props: {
+                value: id,
+                selected: nodeData.link === id
+              }
+            }, name))
+          ]
         )
       ]),
 

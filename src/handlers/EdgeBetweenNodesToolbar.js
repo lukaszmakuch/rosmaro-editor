@@ -7,7 +7,7 @@ import {
 
 const updateEdgeDisplayName = edge => {
   const {name, entryPoint} = edge.data();
-  const newDisplayName = name + ":" + entryPoint;
+  const newDisplayName = name + " : " + entryPoint;
   edge.data('displayName', newDisplayName);
 };
 

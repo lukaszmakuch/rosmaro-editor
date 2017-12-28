@@ -11,10 +11,6 @@ export default (data) => ({
     return targetNode.hasClass('actual-node');
   },
 
-  addedEdge: ({sourceNode, targetNode, addedEles}) => {
-    
-  },
-
   clickedBackground: ({ele}) => {
     return {arrow: 'clickedBackground'};
   },
@@ -26,11 +22,17 @@ export default (data) => ({
         selectedGraphNodeId: ele.data().id,
       },
       arrow: 'clickedGraphNode'
-    }
+    };
   },
 
-  clickedEntryPoint: ({ele}) => {
-
+  clickedEntryPoint: ({ctx, ele}) => {
+    return {
+      ctx: {
+        ...ctx,
+        selectedEntryPointId: ele.data().id,
+      },
+      arrow: 'clickedEntryPoint'
+    };
   },
 
   clickedEdgeBetweenNodes: ({ele, ctx}) => {

@@ -140,7 +140,7 @@ const fromJsonInnerFn = (
                     source: entryPointId,
                     target: targetId,
                     entryPoint: pointData.entryPoint,
-                    displayName: ":" + pointData.entryPoint
+                    displayName: ": " + pointData.entryPoint
                   },
                   classes: 'actual-edge'
                 },
@@ -157,7 +157,7 @@ const fromJsonInnerFn = (
                   target: localChildren[nodeJson.arrows[arrowSrc][arrowName].target].data.id,
                   name: arrowName,
                   entryPoint: nodeJson.arrows[arrowSrc][arrowName].entryPoint,
-                  displayName: arrowName + ":" + nodeJson.arrows[arrowSrc][arrowName].entryPoint
+                  displayName: arrowName + " : " + nodeJson.arrows[arrowSrc][arrowName].entryPoint
                 },
                 classes: 'actual-edge'
               }))
