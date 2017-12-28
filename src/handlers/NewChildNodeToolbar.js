@@ -1,47 +1,20 @@
 const h = require('snabbdom/h').default;
 import getId from 'uuid/v1';
 import {updateCtxBasedOnView, runLayout} from './utils';
+import {
+  typeNewChildNodeName, 
+  addChildNode,
+  cancelAddingChildNode,
+  cancelAddingChildNodeButton
+} from './childNodeToolbarUtils';
 
 export default (data) => ({
 
-  addChildNode: ({ctx}) => {
-    const node = {
-      group: 'nodes',
-      data: {
-        id: getId(),
-        name: ctx.newChildNodeName,
-        link: undefined,
-      },
-      classes: 'actual-node'
-    };
-    data.cy.add(node);
-    runLayout(data.cy);
-    return {
-      arrow: 'added',
-      ctx: updateCtxBasedOnView({
-        ...ctx,
-        newChildNodeName: undefined
-      }, data.cy)
-    };
-  },
+  addChildNode: addChildNode({data}),
 
-  typeNewChildNodeName: ({ctx, name}) => {
-    return {
-      arrow: 'typed',
-      ctx: {
-        ...ctx,
-        newChildNodeName: name
-      }
-    }
-  },
+  typeNewChildNodeName,
 
-  cancelAddingEntryPoint: ({ctx}) => ({
-    arrow: 'canceled',
-    ctx: {
-      ...ctx,
-      newChildNodeName: undefined
-    }
-  }),
+  cancelAddingChildNode,
 
   render: ({ctx, thisModel}) => {
       const newChildNodeName = ctx.newChildNodeName || '';
@@ -66,10 +39,7 @@ export default (data) => ({
           on: {click: e => thisModel.addChildNode()}
         }),
 
-        h('input', {
-          props: {type: 'button', value: 'cancel'},
-          on: {click: e => thisModel.cancelAddingEntryPoint()}
-        }),
+        cancelAddingChildNodeButton({thisModel}),
 
       ];
   }

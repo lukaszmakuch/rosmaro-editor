@@ -1,5 +1,5 @@
 const h = require('snabbdom/h').default;
-import {getAllNodes, runLayout} from './utils';
+import {getAllNodes, runLayout, clearView} from './utils';
 import cloneDeep from 'lodash/cloneDeep';
 
 export default (data) => ({
@@ -11,8 +11,7 @@ export default (data) => ({
       'graph': 'openedGraph',
       'composite': 'openedComposite'
     })[selectedNodeType];
-
-    data.cy.$('*').remove();
+    clearView(data);
     const graphToLoad = JSON.parse(ctx.loadedGraph[nodeId].data || '[]');
     data.cy.json({elements: graphToLoad});
     runLayout(data.cy);

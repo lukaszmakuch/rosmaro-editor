@@ -40,6 +40,10 @@ body, html {
   padding: 10px 20px;
 }
 
+.editor .node-list .nodes li:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
 .editor .node-list .nodes li {
   list-style: none;
   width: 200px;

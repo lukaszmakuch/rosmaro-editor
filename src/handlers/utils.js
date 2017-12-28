@@ -1,5 +1,9 @@
 import cytoscapeConfig from './../cytoscapeConfig';
 
+export const clearView = ({cy}) => {
+  cy.$('*').remove();
+};
+
 export const getAllNodes = ctx => {
   return Object.keys(ctx.loadedGraph)
     .map(nodeId => ({
@@ -8,14 +12,17 @@ export const getAllNodes = ctx => {
     }));
 };
 
-export const selectedGraphNodeData = ({ctx, data}) => {
-  return data.cy.$(`node[id='${ctx.selectedGraphNodeId}']`).data();
+export const selectedChildNodeData = ({ctx, data}) => {
+  return data.cy.$(`node[id='${ctx.selectedChildNodeId}']`).data();
 };
 
 const readGraphDataFromView = (cy) => {
-  return cy
-    .$('.actual-node, .actual-edge, .entry-point, .recent-node')
-    .jsons()
+  return [
+      ...cy.$('.actual-node').jsons(),
+      ...cy.$('.entry-point').jsons(),
+      ...cy.$('.recent-node').jsons(),
+      ...cy.$('.actual-edge').jsons(),
+    ]
     .map(({group, data, classes}) => ({group, data, classes}));
 };
 

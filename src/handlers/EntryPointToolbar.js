@@ -1,8 +1,10 @@
 import {updateCtxBasedOnView, runLayout} from './utils';
 const h = require('snabbdom/h').default;
 
+const defaultName = 'Entry point';
+
 const selectedEntryPointName = ({data, ctx}) => {
-  return entryPoint({data, ctx}).data().name;
+  return entryPoint({data, ctx}).data().name || defaultName;
 };
 
 const entryPoint = ({data, ctx}) => 
@@ -34,7 +36,7 @@ export default (data) => ({
     h('input', {
       props: {type: 'text', value: selectedEntryPointName({data, ctx})},
       on: {input: e => thisModel.typeSelectedEntryPointName({
-        name: e.target.value
+        name: e.target.value || defaultName
       })}
     }),
 

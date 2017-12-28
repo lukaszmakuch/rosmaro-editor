@@ -1,6 +1,8 @@
 const h = require('snabbdom/h').default;
 import omit from 'lodash/omit';
 
+const defaultName = "New node";
+
 export const changeOpenedNodeName = ({ctx, newName}) => {
   const newCtx = {
     ...ctx,
@@ -25,7 +27,7 @@ export const removeNode = data => ({ctx}) => {
 };
 
 export const openedNodeName = ctx => 
-  (ctx.loadedGraph[ctx.openedNode] || {}).name || "";
+  (ctx.loadedGraph[ctx.openedNode] || {}).name || defaultName;
 
 export const removeNodeButton = ({thisModel}) => 
   h('input', {
@@ -37,6 +39,6 @@ export const nodeNameInput = ({thisModel, ctx}) =>
   h('input', {
     props: {type: 'text', value: openedNodeName(ctx)},
     on: {input: e => thisModel.changeOpenedNodeName({
-      newName: e.target.value
+      newName: e.target.value || defaultName
     })}
   });

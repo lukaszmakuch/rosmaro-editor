@@ -19,9 +19,9 @@ export default (data) => ({
     return {
       ctx: {
         ...ctx,
-        selectedGraphNodeId: ele.data().id,
+        selectedChildNodeId: ele.data().id,
       },
-      arrow: 'clickedGraphNode'
+      arrow: 'clickedChildNode'
     };
   },
 

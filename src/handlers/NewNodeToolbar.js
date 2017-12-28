@@ -1,4 +1,4 @@
-import {updateCtxBasedOnView, runLayout} from './utils';
+import {updateCtxBasedOnView, runLayout, clearView} from './utils';
 const h = require('snabbdom/h').default;
 import getId from 'uuid/v1';
 
@@ -58,6 +58,10 @@ const newNode = ctx => {
 };
 
 export default (data) => ({
+
+  onEntry: () => {
+    clearView(data);
+  },
 
   typeNewNodeName: ({ctx, name}) => {
     return {
