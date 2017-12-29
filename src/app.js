@@ -31,6 +31,3 @@ const refreshView = () => {
   lastView = newView;
 };
 refreshView();
-
-// appMachine.noticeCodeChange({code: JSON.stringify(graph)});
-// appMachine.open();
