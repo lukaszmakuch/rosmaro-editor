@@ -6,7 +6,7 @@ export default (data) => ({
     arrow: 'errors closed',
     ctx: {
       ...ctx,
-      errors: []
+      errors: undefined
     }
   }),
 
