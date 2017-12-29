@@ -6,7 +6,7 @@ import ChangeGraphNameToolbar from './ChangeGraphNameToolbar';
 import GraphView from './GraphView';
 import InitializingListOfNodes from './InitializingListOfNodes';
 import InitializingToolbar from './InitializingToolbar';
-import EditingGraph from './EditingGraph';
+import UIExtractor from './UIExtractor';
 import ChildNodeToolbar from './ChildNodeToolbar';
 import EdgeBetweenNodesToolbar from './EdgeBetweenNodesToolbar';
 import EntryPointEdgeToolbar from './EntryPointEdgeToolbar';
@@ -21,9 +21,12 @@ import NewCompositeChildToolbar from './NewCompositeChildToolbar';
 import EditingCompositeChildToolbar from './EditingCompositeChildToolbar';
 import CompositeEdgeHandler from './CompositeEdgeHandler';
 import EditingComposite from './EditingComposite';
+import CodeGenerator from './CodeGenerator';
+import SourceErrorMessage from './SourceErrorMessage';
 
 export default data => ({
   SourceView: SourceView(data),
+  IncorrectSourceView: SourceView(data, SourceErrorMessage),
   'rename leaf': RenameLeaf(data),
   NoNodeSelected: Editor(data),
   InitializingGraph: Editor(data),
@@ -43,13 +46,17 @@ export default data => ({
   InitializingToolbar: InitializingToolbar(data),
   EntryPointToolbar: EntryPointToolbar(data),
   ChildNodeToolbar: ChildNodeToolbar(data),
-  EditingGraph: EditingGraph(data),
+  EditingGraph: UIExtractor(data),
+  Editor: UIExtractor(data),
   EdgeBetweenNodesToolbar: EdgeBetweenNodesToolbar(data),
   EntryPointEdgeToolbar: EntryPointEdgeToolbar(data),
   NewChildNodeToolbar: NewChildNodeToolbar(data),
   NewEntryPointToolbar: NewEntryPointToolbar(data),
   NewNodeToolbar: NewNodeToolbar(data),
   EdgeAdder: EdgeAdder(data),
+
+  // Editor
+  'CodeGenerator': CodeGenerator(data),
 
   // child node editor
   "child node editor": Editor(data),

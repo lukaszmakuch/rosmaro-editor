@@ -28,7 +28,14 @@ export default (data) => ({
   }),
 
   render: ({ctx, thisModel}) => [
-    h('span.header', {}, 'Model nodes'),
+    h('div.header', {}, [
+      h('h1', {}, 'Rosmaro nodes'),
+    
+      h('input.ctrl-button', {
+        props: {type: 'button', value: 'generate code'},
+        on: {click: e => thisModel.generateCode()}
+      }),
+    ]),
     h('ul.nodes', {}, getAllNodes(ctx).map(({id, name}) => 
       h(
         'li', 
@@ -39,9 +46,12 @@ export default (data) => ({
         name
       )
     )),
-    h('button.ctrl-button', {
-      on: {click: () => thisModel.startAddingNewNode()}
-    }, 'add')
+    h('div.ctrl-buttons', {}, [
+      h('input', {
+        props: {type: 'button', value: 'add node'},
+        on: {click: () => thisModel.startAddingNewNode()}
+      })
+    ])
   ]
 
 });

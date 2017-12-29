@@ -2,27 +2,46 @@ import {fromJson} from './../utils/loader';
 const h = require('snabbdom/h').default;
 import getId from 'uuid/v1';
 
-export default () => ({
+export default (data, msg = () => "") => ({
   noticeCodeChange: ({code, ctx}) => {
     const newCtx = {...ctx, code};
     return {arrow: 'codeEdited', ctx: newCtx};
   },
 
-  open: ({ctx}) => ({
-    ctx: {...ctx,
-      loadedGraph: fromJson(JSON.parse(ctx.code), getId)
-    },
-    arrow: 'codeOpened'
-  }),
+  open: ({ctx}) => {
+    try {
+      const loadedGraph = fromJson(JSON.parse(ctx.code || '{}'), getId);
+      return {
+        ctx: {...ctx, loadedGraph},
+        arrow: 'codeOpened'
+      };
+    } catch (e) {
+      return {
+        arrow: 'error'
+      };
+    }
+  },
 
-  render: ({ctx, thisModel}) => h('div', {}, [
-    h('span', {}, 'paste the graph JSON file below'), h('br'),
-    h(
-      'textarea', 
-      {on: {change: e => thisModel.noticeCodeChange({code: e.target.value})}},
-      ctx.code
-    ),
-    h('br'),
-    h('button', {on: {click: () => thisModel.open()}}, 'open')
-  ])
-});
+  render: ({ctx, thisModel}) => 
+    h('div.container', {}, [
+      h('h1', {}, 'Rosmaro Editor'),
+      h("div.subheader", {}, [
+        h('a', {props: {'href': 'https://rosmaro.js.org'}}, 'rosmaro.js.org')
+      ]),
+      h(
+        'textarea.source', 
+        {
+          on: {input: e => thisModel.noticeCodeChange({code: e.target.value})},
+          props: {'placeholder': 'Rosmaro graph JSON goes here'}
+        },
+        ctx.code
+      ),
+      h('div.source-navigation', {}, [
+        msg({ctx}),
+        h('input', {
+          on: {click: () => thisModel.open()},
+          props: {'type': 'button', value: 'load'}
+        })
+      ]),
+    ])
+  });

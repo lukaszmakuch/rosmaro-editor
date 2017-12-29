@@ -54,6 +54,7 @@ const fromJsonInnerFn = (
   builtSoFar = {graph: {}, ids: {}}
 ) => {
   const nodeJson = json[node];
+  if (!nodeJson && node == 'main') return {graph: {}, ids: {}};
 
   if (nodeJson.type === 'leaf') {
     if (alreadyBuilt(builtSoFar, node)) return builtSoFar;
@@ -205,6 +206,113 @@ const fromJsonInnerFn = (
 
 };
 
-export const toJSON = dataset => {
+const getElement = (elements, id) =>
+  elements.find(ele => ele.data.id == id);
 
+const isEdge = ele => ele.classes == 'actual-edge';
+
+const blah = (elements, dataset) => {
+  return elements.reduce(
+    (built, ele) => {
+      if (!isEdge(ele)) return built;
+      const source = getElement(elements, ele.data.source);
+      const target = getElement(elements, ele.data.target);
+      if (
+        source.classes == 'actual-node'
+        && target.classes == 'actual-node'
+      ) {
+        // an arrow between nodes
+        return {
+          ...built,
+          arrows: {
+            ...built.arrows,
+            [source.data.name]: {
+              ...(built.arrows[source.data.name] || {}),
+              [ele.data.name]: {
+                target: target.data.name,
+                entryPoint: ele.data.entryPoint
+              }
+            }
+          }
+        };
+      } else {
+        // an entry point
+        return {
+          ...built,
+          entryPoints: {
+            ...built.entryPoints,
+            [source.data.name]: {
+              target: target.data.name,
+              entryPoint: ele.data.entryPoint
+            }
+          }
+        };
+      }
+    }, 
+    {'arrows': {}, 'entryPoints': {}}
+  );
+};
+
+const graphToJson = (dataset, id) => {
+  const elements = graphElements(dataset, id);
+  const nodes = buildNodes(elements, dataset);
+
+  return {
+    [nodeName(dataset, id)]: {
+      type: "graph",
+      nodes,
+      ...blah(elements, dataset),
+    }
+  };
+};
+
+const nodeName = (dataset, id) => dataset[id].name;
+
+const leafToJson = (dataset, id) => {
+  return {
+    [nodeName(dataset, id)]: {
+      type: "leaf"
+    }
+  };
+};
+
+const graphElements = (dataset, id) => {
+  const nodeData = dataset[id];
+  return JSON.parse(nodeData.data);
+};
+
+const buildNodes = (elements, dataset) => {
+  return elements
+    .filter(ele => ele.classes == 'actual-node')
+    .reduce((nodes, node) => ({
+      ...nodes,
+      [node.data.name]: nodeName(dataset, node.data.link)
+    }), {});
+};
+
+const compositeToJson = (dataset, id) => {
+  const elements = graphElements(dataset, id);
+  const nodes = buildNodes(elements, dataset);
+  return {
+    [nodeName(dataset, id)]: {
+      type: "composite",
+      nodes
+    }
+  };
+};
+
+const nodeToJson = (dataset, id) => {
+  const type = dataset[id].type;
+  if (type === 'graph') return graphToJson(dataset, id);
+  if (type === 'leaf') return leafToJson(dataset, id);
+  if (type === 'composite') return compositeToJson(dataset, id);
+};
+
+export const toJson = dataset => {
+  return Object.keys(dataset).reduce((built, id) => {
+    return {
+      ...built,
+      ...nodeToJson(dataset, id)
+    };
+  }, {});
 };

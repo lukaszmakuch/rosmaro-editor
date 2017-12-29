@@ -4,7 +4,8 @@
     "type": "graph",
     "nodes": {
       "SourceView": "SourceView", 
-      "Editor": "Editor"
+      "Editor": "Editor",
+      "IncorrectSourceView": "IncorrectSourceView"
     },
     "entryPoints": {
       "start": {"target": "SourceView", "entryPoint": "start"}
@@ -12,9 +13,16 @@
     "arrows": {
       "SourceView": {
         "codeOpened": {"target": "Editor", "entryPoint": "start"},
-        "codeEdited": {"target": "SourceView", "entryPoint": "start"}
+        "codeEdited": {"target": "SourceView", "entryPoint": "start"},
+        "error": {"target": "IncorrectSourceView", "entryPoint": "start"}
+      },
+      "IncorrectSourceView": {
+        "codeOpened": {"target": "Editor", "entryPoint": "start"},
+        "codeEdited": {"target": "SourceView", "entryPoint": "start"},
+        "error": {"target": "IncorrectSourceView", "entryPoint": "start"}
       },
       "Editor": {
+        "generated code": {"target": "SourceView", "entryPoint": "start"},
         "started adding node": {"target": "Editor", "entryPoint": "adding node"},
         "openedLeaf": {"target": "Editor", "entryPoint": "editing leaf"},
         "openedComposite": {"target": "Editor", "entryPoint": "editing composite"},
@@ -24,11 +32,21 @@
     }
   },
 
-  "SourceView": {
-    "type": "leaf"
-  },
+  "SourceView": {"type": "leaf"},
+
+  "IncorrectSourceView": {"type": "leaf"},
+
+  "CodeGenerator": {"type": "leaf"},
 
   "Editor": {
+    "type": "composite",
+    "nodes": {
+      "UI": "EditorUI",
+      "CodeGenerator": "CodeGenerator"
+    }
+  },
+
+  "EditorUI": {
     "type": "graph",
     "nodes": {
       "InitializingGraph": "InitializingGraph",

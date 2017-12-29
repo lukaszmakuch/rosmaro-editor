@@ -32,5 +32,5 @@ const refreshView = () => {
 };
 refreshView();
 
-appMachine.noticeCodeChange({code: JSON.stringify(graph)});
-appMachine.open();
+// appMachine.noticeCodeChange({code: JSON.stringify(graph)});
+// appMachine.open();
