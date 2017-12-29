@@ -26,7 +26,7 @@ export default (data, msg = () => "") => ({
     h('div.container', {}, [
       h('h1', {}, 'Rosmaro Editor'),
       h("div.subheader", {}, [
-        h('a', {props: {'href': 'https://rosmaro.js.org'}}, 'rosmaro.js.org')
+        h('a', {props: {'target': '_blank', 'href': 'https://rosmaro.js.org'}}, 'rosmaro.js.org')
       ]),
       h(
         'textarea.source', 
