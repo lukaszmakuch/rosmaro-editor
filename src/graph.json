@@ -22,12 +22,8 @@
         "error": {"target": "IncorrectSourceView", "entryPoint": "start"}
       },
       "Editor": {
-        "generated code": {"target": "SourceView", "entryPoint": "start"},
-        "started adding node": {"target": "Editor", "entryPoint": "adding node"},
-        "openedLeaf": {"target": "Editor", "entryPoint": "editing leaf"},
-        "openedComposite": {"target": "Editor", "entryPoint": "editing composite"},
-        "openedGraph": {"target": "Editor", "entryPoint": "editing graph"},
-        "removedNode": {"target": "Editor", "entryPoint": "no node selected"}
+        "code generation error": {"target": "Editor", "entryPoint": "history"},
+        "generated code": {"target": "SourceView", "entryPoint": "start"}
       }
     }
   },
@@ -47,6 +43,52 @@
   },
 
   "EditorUI": {
+    "type": "composite",
+    "nodes": {
+      "top": "EditorUITopLayer",
+      "bottom": "EditorUIBottomLayer"
+    }
+  },
+
+  "EditorUITopLayer": {
+    "type": "graph",
+    "nodes": {
+      "EditorUITopLayerView": "EditorUITopLayerView"
+    },
+    "entryPoints": {
+      "start": {"target": "EditorUITopLayerView", "entryPoint": "start"},
+      "history": {"target": "recent", "entryPoint": "history"}
+    },
+    "arrows": {
+      "EditorUITopLayerView": {
+        "errors closed": {"target": "EditorUITopLayerView", "entryPoint": "history"}
+      }
+    }
+  },
+
+  "EditorUITopLayerView": {"type": "leaf"},
+
+  "EditorUIBottomLayer": {
+    "type": "graph",
+    "nodes": {
+      "EditorUIBottomLayerView": "EditorUIBottomLayerView"
+    },
+    "entryPoints": {
+      "start": {"target": "EditorUIBottomLayerView", "entryPoint": "start"},
+      "history": {"target": "recent", "entryPoint": "history"}
+    },
+    "arrows": {
+      "EditorUIBottomLayerView": {
+        "started adding node": {"target": "EditorUIBottomLayerView", "entryPoint": "adding node"},
+        "openedLeaf": {"target": "EditorUIBottomLayerView", "entryPoint": "editing leaf"},
+        "openedComposite": {"target": "EditorUIBottomLayerView", "entryPoint": "editing composite"},
+        "openedGraph": {"target": "EditorUIBottomLayerView", "entryPoint": "editing graph"},
+        "removedNode": {"target": "EditorUIBottomLayerView", "entryPoint": "no node selected"}
+      }
+    }
+  },
+
+  "EditorUIBottomLayerView": {
     "type": "graph",
     "nodes": {
       "InitializingGraph": "InitializingGraph",
@@ -57,6 +99,7 @@
       "editing composite": "editing composite"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "InitializingGraph", "entryPoint": "start"},
       "adding node": {"target": "AddingNode", "entryPoint": "start"},
       "editing leaf": {"target": "editing leaf", "entryPoint": "start"},
@@ -107,6 +150,7 @@
       "composite editor views": "composite editor views"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "composite editor views", "entryPoint": "start"}
     },
     "arrows": {
@@ -126,6 +170,7 @@
       "editing composite child": "child node editor"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "editing composite itself", "entryPoint": "start"},
       "edit composite itself": {"target": "editing composite itself", "entryPoint": "start"},
       "edit composite child": {"target": "editing composite child", "entryPoint": "start"}
@@ -168,6 +213,7 @@
       "composite itself toolbar view": "composite itself toolbar view"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "composite itself toolbar view", "entryPoint": "start"}
     },
     "arrows": {
@@ -183,6 +229,7 @@
       "new composite child toolbar view": "new composite child toolbar view"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "new composite child toolbar view", "entryPoint": "start"}
     },
     "arrows": {
@@ -210,6 +257,7 @@
       "rename": "rename leaf"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "rename", "entryPoint": "start"}
     },
     "arrows": {
@@ -233,6 +281,7 @@
       }
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "AddingNodeScreen", "entryPoint": "history"}
     }
   },
@@ -273,6 +322,7 @@
       "child node toolbar view": "child node toolbar view"
     },
     "entryPoints": {
+      "history": {"target": "recent", "entryPoint": "history"},
       "start": {"target": "child node toolbar view", "entryPoint": "start"}
     },
     "arrows": {

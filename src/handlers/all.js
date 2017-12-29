@@ -23,6 +23,8 @@ import CompositeEdgeHandler from './CompositeEdgeHandler';
 import EditingComposite from './EditingComposite';
 import CodeGenerator from './CodeGenerator';
 import SourceErrorMessage from './SourceErrorMessage';
+import EditorUI from './EditorUI';
+import EditorTopLayer from './EditorTopLayer';
 
 export default data => ({
   SourceView: SourceView(data),
@@ -56,7 +58,9 @@ export default data => ({
   EdgeAdder: EdgeAdder(data),
 
   // Editor
+  'EditorUI': EditorUI(data),
   'CodeGenerator': CodeGenerator(data),
+  'EditorUITopLayerView': EditorTopLayer(data),
 
   // child node editor
   "child node editor": Editor(data),

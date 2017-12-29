@@ -209,7 +209,7 @@ const fromJsonInnerFn = (
 const getElement = (elements, id) =>
   elements.find(ele => ele.data.id == id);
 
-const isEdge = ele => ele.classes == 'actual-edge';
+const isEdge = ele => ele.classes.includes('actual-edge');
 
 const blah = (elements, dataset) => {
   return elements.reduce(
@@ -218,8 +218,8 @@ const blah = (elements, dataset) => {
       const source = getElement(elements, ele.data.source);
       const target = getElement(elements, ele.data.target);
       if (
-        source.classes == 'actual-node'
-        && target.classes == 'actual-node'
+        source.classes.includes('actual-node')
+        && target.classes.includes('actual-node')
       ) {
         // an arrow between nodes
         return {
@@ -256,7 +256,6 @@ const blah = (elements, dataset) => {
 const graphToJson = (dataset, id) => {
   const elements = graphElements(dataset, id);
   const nodes = buildNodes(elements, dataset);
-
   return {
     [nodeName(dataset, id)]: {
       type: "graph",
@@ -283,7 +282,7 @@ const graphElements = (dataset, id) => {
 
 const buildNodes = (elements, dataset) => {
   return elements
-    .filter(ele => ele.classes == 'actual-node')
+    .filter(ele => ele.classes.includes('actual-node'))
     .reduce((nodes, node) => ({
       ...nodes,
       [node.data.name]: nodeName(dataset, node.data.link)
