@@ -24,7 +24,7 @@ export default (data) => ({
   typeSelectedEntryPointName: ({ctx, name}) => {
     const p = entryPoint({data, ctx});
     p.data('name', name);
-    p.data('displayName', ":" + name);
+    p.data('displayName', " : " + name);
     return {
       arrow: 'typedEntryPointName',
       ctx: updateCtxBasedOnView(ctx, data.cy)

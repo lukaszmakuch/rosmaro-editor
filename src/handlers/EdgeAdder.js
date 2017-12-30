@@ -17,7 +17,7 @@ export default (data) => ({
           source: sourceNode.data().id,
           target: targetNode.data().id,
           entryPoint: 'start',
-          displayName: 'action:start',
+          displayName: 'action : start',
           name: 'action'
         },
         classes: 'actual-edge'
@@ -45,7 +45,7 @@ export default (data) => ({
           source: sourceNode.data().id,
           target: targetNode.data().id,
           entryPoint: 'start',
-          displayName: ':start'
+          displayName: ': start'
         },
         classes: 'actual-edge'
       });
