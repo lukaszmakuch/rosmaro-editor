@@ -2,7 +2,7 @@ const h = require('snabbdom/h').default;
 
 export default (data) => ({
 
-  afterRender: res => 
+  afterRender: ({res}) => 
     h('div.editor', {}, [
       h('div.main-screen', {}, [
         h('div.node-list', {}, res.nodeList),

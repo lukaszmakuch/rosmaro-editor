@@ -1,3 +1,3 @@
 export default () => ({
-  afterRender: ({UI}) => UI
+  afterRender: ({res}) => res.UI
 });

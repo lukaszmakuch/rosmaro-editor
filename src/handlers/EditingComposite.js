@@ -1,3 +1,3 @@
 export default () => ({
-  afterRender: res => res['composite editor']
+  afterRender: ({res}) => res['composite editor']
 });
