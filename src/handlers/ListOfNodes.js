@@ -7,9 +7,9 @@ export default (data) => ({
   handleNodeSelect: ({nodeId, ctx}) => {
     const selectedNodeType = ctx.loadedGraph[nodeId].type;
     const arrow = ({
-      'leaf': 'openedLeaf',
-      'graph': 'openedGraph',
-      'composite': 'openedComposite'
+      'leaf': 'opened leaf',
+      'graph': 'opened graph',
+      'composite': 'opened composite'
     })[selectedNodeType];
     clearView(data);
     const graphToLoad = JSON.parse(ctx.loadedGraph[nodeId].data || '[]');

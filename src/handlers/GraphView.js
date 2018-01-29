@@ -12,7 +12,7 @@ export default (data) => ({
   },
 
   clickedBackground: ({ele}) => {
-    return {arrow: 'clickedBackground'};
+    return {arrow: 'clicked background'};
   },
 
   clickedActualNode: ({ctx, ele}) => {
@@ -21,7 +21,7 @@ export default (data) => ({
         ...ctx,
         selectedChildNodeId: ele.data().id,
       },
-      arrow: 'clickedChildNode'
+      arrow: 'clicked child node'
     };
   },
 
@@ -31,13 +31,13 @@ export default (data) => ({
         ...ctx,
         selectedEntryPointId: ele.data().id,
       },
-      arrow: 'clickedEntryPoint'
+      arrow: 'clicked entry point'
     };
   },
 
   clickedEdgeBetweenNodes: ({ele, ctx}) => {
     return {
-      arrow: 'clickedEdgeBetweenNodes',
+      arrow: 'clicked edge between nodes',
       ctx: {
         ...ctx,
         selectedEdgeId: ele.data().id
@@ -47,7 +47,7 @@ export default (data) => ({
 
   clickedEdgeFromEntryPoint: ({ele, ctx}) => {
     return {
-      arrow: 'clickedEntryPointEdge',
+      arrow: 'clicked entry point edge',
       ctx: {
         ...ctx,
         selectedEdgeId: ele.data().id
@@ -56,7 +56,7 @@ export default (data) => ({
   },
 
   graphViewIsReady: ({ctx}) => {
-    return ({arrow: 'graphViewIsReady'})
+    return ({arrow: 'graph view is ready'})
   },
 
   render: ({thisModel}) => h('div#graph-view', {
@@ -95,7 +95,6 @@ export default (data) => ({
             const params = {ele: target};
             if (fromEntryPoint) thisModel.clickedEdgeFromEntryPoint(params)
               else thisModel.clickedEdgeBetweenNodes(params);
-            ;
           });
 
           thisModel.graphViewIsReady();

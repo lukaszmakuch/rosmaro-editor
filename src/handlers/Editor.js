@@ -5,10 +5,10 @@ export default (data) => ({
   afterRender: ({res}) => 
     h('div.editor', {}, [
       h('div.main-screen', {}, [
-        h('div.node-list', {}, res.nodeList),
-        res.graphView
+        h('div.node-list', {}, res.NodeList),
+        res.GraphView
       ]),
-      h('div.toolbar', {}, res.toolbar)
+      h('div.toolbar', {}, res.Toolbar)
     ])
     
 });

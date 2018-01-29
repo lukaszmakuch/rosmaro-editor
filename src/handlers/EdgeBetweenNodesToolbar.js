@@ -18,7 +18,7 @@ export default (data) => ({
     edge.data('name', newEdgeName);
     updateEdgeDisplayName(edge);
     return {
-      arrow: 'changedEdgeName',
+      arrow: 'changed edge name',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   },

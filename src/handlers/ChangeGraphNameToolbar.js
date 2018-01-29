@@ -12,9 +12,9 @@ export default (data) => ({
 
   removeNode: removeNode(data),
 
-  addChildNode: () => ({arrow: 'addingChildNodeBegan'}),
+  addChildNode: () => ({arrow: 'adding child node began'}),
 
-  addEntryPoint: () => ({arrow: 'addingEntryPointBegan'}),
+  addEntryPoint: () => ({arrow: 'adding entry point began'}),
 
   render: ({ctx, thisModel}) => [
 

@@ -6,7 +6,7 @@ export const changeSelectedEdgeEntryPoint = ({data, updateEdgeDisplayName}) =>
     edge.data('entryPoint', newEntryPoint);
     updateEdgeDisplayName(edge);
     return {
-      arrow: 'changedEdgeEntryPoint',
+      arrow: 'changed edge entry point',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   };
@@ -14,7 +14,7 @@ export const changeSelectedEdgeEntryPoint = ({data, updateEdgeDisplayName}) =>
 export const deleteSelectedEdge = data => ({ctx}) => {
   getEdge({ctx, data}).remove();
   return {
-    arrow: 'removedEdge',
+    arrow: 'removed edge',
     ctx: updateCtxBasedOnView(ctx, data.cy)
   };
 };

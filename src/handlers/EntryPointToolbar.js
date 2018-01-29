@@ -16,7 +16,7 @@ export default (data) => ({
     entryPoint({data, ctx}).remove();
     data.eh.hide();
     return {
-      arrow: 'removedEntryPoint',
+      arrow: 'removed entry point',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   },
@@ -26,7 +26,7 @@ export default (data) => ({
     p.data('name', name);
     p.data('displayName', " : " + name);
     return {
-      arrow: 'typedEntryPointName',
+      arrow: 'typed entry point name',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   },

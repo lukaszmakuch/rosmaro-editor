@@ -5,7 +5,7 @@ import getId from 'uuid/v1';
 export default (data, msg = () => "") => ({
   noticeCodeChange: ({code, ctx}) => {
     const newCtx = {...ctx, code};
-    return {arrow: 'codeEdited', ctx: newCtx};
+    return {arrow: 'code edited', ctx: newCtx};
   },
 
   open: ({ctx}) => {
@@ -13,7 +13,7 @@ export default (data, msg = () => "") => ({
       const loadedGraph = fromJson(JSON.parse(ctx.code || '{}'), getId);
       return {
         ctx: {...ctx, loadedGraph},
-        arrow: 'codeOpened'
+        arrow: 'code opened'
       };
     } catch (e) {
       return {

@@ -55,7 +55,7 @@ export default (data) => ({
     }
 
     return {
-      arrow: 'updatedEdges',
+      arrow: 'updated edges',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
 

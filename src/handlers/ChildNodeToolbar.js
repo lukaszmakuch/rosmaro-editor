@@ -6,17 +6,19 @@ const defaultChildName = 'Child node';
 export default (data) => ({
 
   changeSelectedChildNodeName: ({ctx, newName}) => {
-    data.cy.$(`node[id='${ctx.selectedChildNodeId}']`).data('name', newName || defaultChildName);
+    data.cy.$(`node[id='${ctx.selectedChildNodeId}']`)
+      .data('name', newName || defaultChildName);
     return {
-      arrow: 'typedNodeName',
+      arrow: 'typed node name',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   },
 
   changeUnderlayingNode: ({ctx, newUnderlayingNodeId}) => {
-    data.cy.$(`node[id='${ctx.selectedChildNodeId}']`).data('link', newUnderlayingNodeId);
+    data.cy.$(`node[id='${ctx.selectedChildNodeId}']`)
+      .data('link', newUnderlayingNodeId);
     return {
-      arrow: 'changedUnderlayingNode',
+      arrow: 'changed underlaying node',
       ctx: updateCtxBasedOnView(ctx, data.cy)
     };
   },
@@ -27,7 +29,7 @@ export default (data) => ({
     data.eh.hide();
     const newCtx = updateCtxBasedOnView(ctx, data.cy);
     return {
-      arrow: 'removedChildNode',
+      arrow: 'removed child node',
       ctx: newCtx
     };
   },

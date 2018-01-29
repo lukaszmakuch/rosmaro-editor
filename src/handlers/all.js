@@ -18,7 +18,6 @@ import NewNodeToolbar from './NewNodeToolbar';
 import RenameLeaf from './RenameLeaf';
 import CompositeItselfToolbar from './CompositeItselfToolbar';
 import NewCompositeChildToolbar from './NewCompositeChildToolbar';
-import EditingCompositeChildToolbar from './EditingCompositeChildToolbar';
 import CompositeEdgeHandler from './CompositeEdgeHandler';
 import EditingComposite from './EditingComposite';
 import CodeGenerator from './CodeGenerator';
@@ -29,13 +28,13 @@ import EditorTopLayer from './EditorTopLayer';
 export default data => ({
   SourceView: SourceView(data),
   IncorrectSourceView: SourceView(data, SourceErrorMessage),
-  'rename leaf': RenameLeaf(data),
+  RenameLeaf: RenameLeaf(data),
   NoNodeSelected: Editor(data),
   InitializingGraph: Editor(data),
   EditingGraphItself: Editor(data),
-  'editing composite': EditingComposite(data),
+  EditingComposite: EditingComposite(data),
   EditingChildNode: Editor(data),
-  "editing leaf": Editor(data),
+  EditingLeaf: Editor(data),
   EditingEntryPoint: Editor(data),
   AddingNodeScreen: Editor(data),
   EditingEntryPointEdge: Editor(data),
@@ -58,25 +57,24 @@ export default data => ({
   EdgeAdder: EdgeAdder(data),
 
   // Editor
-  'EditorUI': EditorUI(data),
-  'CodeGenerator': CodeGenerator(data),
-  'EditorUITopLayerView': EditorTopLayer(data),
+  EditorUI: EditorUI(data),
+  CodeGenerator: CodeGenerator(data),
+  EditorUITopLayerView: EditorTopLayer(data),
 
   // child node editor
-  "child node editor": Editor(data),
-  "child node toolbar view": ChildNodeToolbar(data),
+  ChildNodeEditor: Editor(data),
+  ChildNodeToolbarView: ChildNodeToolbar(data),
 
   // composites - whole views
-  "editing composite itself": Editor(data),
-  "adding composite child": Editor(data),
-  "editing composite child": Editor(data),
+  EditingCompositeItself: Editor(data),
+  AddingCompositeChild: Editor(data),
+  EditingCompositeChild: Editor(data),
 
   // composites - toolbars
-  "composite itself toolbar view": CompositeItselfToolbar(data),
-  "new composite child toolbar view": NewCompositeChildToolbar(data),
-  "editing composite child toolbar view": EditingCompositeChildToolbar(data),
+  CompositeItselfToolbarView: CompositeItselfToolbar(data),
+  NewCompositeChildToolbarView: NewCompositeChildToolbar(data),
 
   // composites - utils
-  'composite edge handler': CompositeEdgeHandler(data),
+  CompositeEdgeHandler: CompositeEdgeHandler(data),
 
 });

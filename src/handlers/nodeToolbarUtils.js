@@ -14,7 +14,7 @@ export const changeOpenedNodeName = ({ctx, newName}) => {
       }
     }
   };
-  return {ctx: newCtx, arrow: 'changedNodeName'};
+  return {ctx: newCtx, arrow: 'changed node name'};
 };
 
 export const removeNode = data => ({ctx}) => {
@@ -23,7 +23,7 @@ export const removeNode = data => ({ctx}) => {
     ...ctx,
     loadedGraph: omit(ctx.loadedGraph, [ctx.openedNode])
   };
-  return {ctx: newCtx, arrow: 'removedNode'};
+  return {ctx: newCtx, arrow: 'removed node'};
 };
 
 export const openedNodeName = ctx => 
