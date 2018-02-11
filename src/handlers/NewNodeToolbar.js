@@ -3,7 +3,7 @@ const h = require('snabbdom/h').default;
 import getId from 'uuid/v1';
 
 const defaultType = 'leaf';
-const nodeTypes = ["leaf", "graph", "composite"];
+const nodeTypes = ["leaf", "graph", "composite", "dynamicComposite"];
 
 const newNodeName = ctx => ctx.newNodeName || "";
 
@@ -23,6 +23,16 @@ const newNode = ctx => {
     return {
       [getId()]: {
         type: 'composite', 
+        name,
+        data: '[]'
+      }
+    };
+  }
+
+  if (type === 'dynamicComposite') {
+    return {
+      [getId()]: {
+        type: 'dynamicComposite', 
         name,
         data: '[]'
       }

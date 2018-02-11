@@ -1,5 +1,8 @@
 import {fromJson, toJson} from './loader';
 
+import graph1 from './../graph.json';
+import graph2 from './../graph2.json';
+
 const idGenerator = () => {
   let nextId = 0;
   return () => "id" + nextId++;
@@ -32,7 +35,12 @@ describe('loader', () => {
         }
       },
 
-      'A': {type: 'leaf'},
+      'A': {
+        type: 'dynamicComposite',
+        nodeTemplate: 'DynamicChild'
+      },
+
+      'DynamicChild': {type: 'leaf'},
 
       'B': {
         type: 'composite',
@@ -64,236 +72,212 @@ describe('loader', () => {
     };
 
     const editorFormat = {
-      
-      'id15': {
-        name: 'main',
-        type: 'graph',
-        data: stringify([
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id16',
-              name: 'A',
-              link: 'id0',
-            },
-            classes: 'actual-node'
+    "id0": {
+      "name": "DynamicChild",
+      "type": "leaf"
+    },
+    "id1": {
+      "name": "A",
+      "type": "dynamicComposite",
+      "link": "id0"
+    },
+    "id2": {
+      "name": "BSubA",
+      "type": "leaf"
+    },
+    "id3": {
+      "name": "BSubB",
+      "type": "leaf"
+    },
+    "id4": {
+      "name": "BSub",
+      "type": "graph",
+      "data": JSON.stringify([
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id5",
+            "name": "A",
+            "link": "id2"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id17',
-              name: 'B',
-              link: 'id12',
-            },
-            classes: 'actual-node'
+          "classes": "actual-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id6",
+            "name": "B",
+            "link": "id3"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id18',
-              name: 'recent'
-            },
-            classes: 'recent-node'
+          "classes": "actual-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id7",
+            "name": "recent"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id19',
-              name: 'start'
-            },
-            classes: 'entry-point'
+          "classes": "recent-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id8",
+            "name": "start"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id20',
-              source: 'id19',
-              target: 'id16',
-              entryPoint: 'start',
-              displayName: ': start'
-            },
-            classes: 'actual-edge'
+          "classes": "entry-point"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id9",
+            "source": "id8",
+            "target": "id5",
+            "entryPoint": "start",
+            "displayName": ": start"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id21',
-              name: 'history',
-            },
-            classes: 'entry-point'
+          "classes": "actual-edge"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id10",
+            "name": "p"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id22',
-              source: 'id21',
-              target: 'id18',
-              entryPoint: 'start',
-              displayName: ': start',
-            },
-            classes: 'actual-edge'
+          "classes": "entry-point"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id11",
+            "source": "id10",
+            "target": "id6",
+            "entryPoint": "start",
+            "displayName": ": start"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id23',
-              source: 'id16',
-              target: 'id17',
-              name: 'x',
-              entryPoint: 'p',
-              displayName: 'x : p'
-            },
-            classes: 'actual-edge'
+          "classes": "actual-edge"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id12",
+            "source": "id5",
+            "target": "id6",
+            "name": "x",
+            "entryPoint": "start",
+            "displayName": "x : start"
           },
-
-        ])
-
-      },
-
-      'id0': {
-        name: 'A',
-        type: 'leaf'
-      },
-
-      'id12': {
-        name: 'B',
-        type: 'composite',
-        data: stringify([
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id13',
-              name: 'A',
-              link: 'id3',
-            },
-            classes: 'actual-node'
+          "classes": "actual-edge"
+        }
+      ])
+    },
+    "id13": {
+      "name": "B",
+      "type": "composite",
+      "data": JSON.stringify([
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id14",
+            "name": "A",
+            "link": "id4"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id14',
-              name: 'B',
-              link: 'id3',
-            },
-            classes: 'actual-node'
+          "classes": "actual-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id15",
+            "name": "B",
+            "link": "id4"
           },
-
-        ])
-      },
-
-      'id3': {
-        name: 'BSub',
-        type: 'graph',
-        data: stringify([
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id4',
-              name: 'A',
-              link: 'id1',
-            },
-            classes: 'actual-node'
+          "classes": "actual-node"
+        }
+      ])
+    },
+    "id16": {
+      "name": "main",
+      "type": "graph",
+      "data": JSON.stringify([
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id17",
+            "name": "A",
+            "link": "id1"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id5',
-              name: 'B',
-              link: 'id2',
-            },
-            classes: 'actual-node'
+          "classes": "actual-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id18",
+            "name": "B",
+            "link": "id13"
           },
-
-          {
-            group: "nodes",
-            data: {
-              id: "id6",
-              name: "recent"
-            },
-            classes: "recent-node"
+          "classes": "actual-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id19",
+            "name": "recent"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id7',
-              name: 'start'
-            },
-            classes: 'entry-point'
+          "classes": "recent-node"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id20",
+            "name": "start"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id8',
-              source: 'id7',
-              target: 'id4',
-              entryPoint: 'start',
-              displayName: ': start'
-            },
-            classes: 'actual-edge'
+          "classes": "entry-point"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id21",
+            "source": "id20",
+            "target": "id17",
+            "entryPoint": "start",
+            "displayName": ": start"
           },
-
-          {
-            group: 'nodes',
-            data: {
-              id: 'id9',
-              name: 'p'
-            },
-            classes: 'entry-point'
+          "classes": "actual-edge"
+        },
+        {
+          "group": "nodes",
+          "data": {
+            "id": "id22",
+            "name": "history"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id10',
-              source: 'id9',
-              target: 'id5',
-              entryPoint: 'start',
-              displayName: ': start'
-            },
-            classes: 'actual-edge'
+          "classes": "entry-point"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id23",
+            "source": "id22",
+            "target": "id19",
+            "entryPoint": "start",
+            "displayName": ": start"
           },
-
-          {
-            group: 'edges',
-            data: {
-              id: 'id11',
-              source: 'id4',
-              target: 'id5',
-              name: 'x',
-              entryPoint: 'start',
-              displayName: 'x : start'
-            },
-            classes: 'actual-edge'
+          "classes": "actual-edge"
+        },
+        {
+          "group": "edges",
+          "data": {
+            "id": "id24",
+            "source": "id17",
+            "target": "id18",
+            "name": "x",
+            "entryPoint": "p",
+            "displayName": "x : p"
           },
-
-        ])
-      },
-
-      'id1': {
-        name: 'BSubA',
-        type: 'leaf',
-      },
-
-      'id2': {
-        name: 'BSubB',
-        type: 'leaf',
-      },
-
-    };
+          "classes": "actual-edge"
+        }
+      ])
+    }
+  };
 
     const builtFromJson = fromJson(rosmaroFormat, idGenerator());
     expect(builtFromJson).toEqual(editorFormat);

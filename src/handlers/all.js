@@ -24,6 +24,8 @@ import CodeGenerator from './CodeGenerator';
 import SourceErrorMessage from './SourceErrorMessage';
 import EditorUI from './EditorUI';
 import EditorTopLayer from './EditorTopLayer';
+import EditingDynamicComposite from './EditingDynamicComposite';
+import DynamicCompositeToolbarView from './DynamicCompositeToolbarView';
 
 export default data => ({
   SourceView: SourceView(data),
@@ -32,6 +34,8 @@ export default data => ({
   NoNodeSelected: Editor(data),
   InitializingGraph: Editor(data),
   EditingGraphItself: Editor(data),
+  DynamicCompositeEditorUI: Editor(data),
+  EditingDynamicComposite: EditingDynamicComposite(data),
   EditingComposite: EditingComposite(data),
   EditingChildNode: Editor(data),
   EditingLeaf: Editor(data),
@@ -46,7 +50,6 @@ export default data => ({
   InitializingListOfNodes: InitializingListOfNodes(data),
   InitializingToolbar: InitializingToolbar(data),
   EntryPointToolbar: EntryPointToolbar(data),
-  ChildNodeToolbar: ChildNodeToolbar(data),
   EditingGraph: UIExtractor(data),
   Editor: UIExtractor(data),
   EdgeBetweenNodesToolbar: EdgeBetweenNodesToolbar(data),
@@ -76,5 +79,8 @@ export default data => ({
 
   // composites - utils
   CompositeEdgeHandler: CompositeEdgeHandler(data),
+
+  // dynamic composites
+  DynamicCompositeToolbarView: DynamicCompositeToolbarView(data),
 
 });

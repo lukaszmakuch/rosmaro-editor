@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx webpack --config webpack.prod.js",
     "start": "npx webpack --watch --config webpack.dev.js",
-    "test": "./node_modules/.bin/jest ./src"
+    "test": "./node_modules/.bin/jest "
   },
   "author": "Łukasz Makuch",
   "license": "MIT",

@@ -9,7 +9,8 @@ export default (data) => ({
     const arrow = ({
       'leaf': 'opened leaf',
       'graph': 'opened graph',
-      'composite': 'opened composite'
+      'composite': 'opened composite',
+      'dynamicComposite': 'opened dynamicComposite'
     })[selectedNodeType];
     clearView(data);
     const graphToLoad = JSON.parse(ctx.loadedGraph[nodeId].data || '[]');

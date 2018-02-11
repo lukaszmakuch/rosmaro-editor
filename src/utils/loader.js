@@ -204,6 +204,33 @@ const fromJsonInnerFn = (
     });
   }
 
+  if (nodeJson.type === 'dynamicComposite') {
+    if (alreadyBuilt(builtSoFar, node)) return builtSoFar;
+
+    const builtChildren = buildChildren(
+      json,
+      getId,
+      [nodeJson.nodeTemplate],
+      builtSoFar
+    );
+
+    if (alreadyBuilt(builtChildren, node)) return builtChildren;
+
+    const id = getId();
+    return mergeRes(builtChildren, {
+      graph: {
+        [id]: {
+          name: node,
+          type: 'dynamicComposite',
+          link: builtChildren.ids[nodeJson.nodeTemplate]
+        }
+      },
+      ids: {
+        [node]: id
+      }
+    });
+  }
+
 };
 
 const getElement = (elements, id) =>
@@ -300,11 +327,21 @@ const compositeToJson = (dataset, id) => {
   };
 };
 
+const dynamicCompositeToJson = (dataset, id) => {
+  return {
+    [nodeName(dataset, id)]: {
+      type: "dynamicComposite",
+      nodeTemplate: dataset[dataset[id].link].name
+    }
+  };
+};
+
 const nodeToJson = (dataset, id) => {
   const type = dataset[id].type;
   if (type === 'graph') return graphToJson(dataset, id);
   if (type === 'leaf') return leafToJson(dataset, id);
   if (type === 'composite') return compositeToJson(dataset, id);
+  if (type === 'dynamicComposite') return dynamicCompositeToJson(dataset, id);
 };
 
 export const toJson = dataset => {

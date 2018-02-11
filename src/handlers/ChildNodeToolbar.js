@@ -1,5 +1,12 @@
 const h = require('snabbdom/h').default;
-import {getAllNodes, updateCtxBasedOnView, selectedChildNodeData} from './utils';
+import {
+  getAllNodes, 
+  updateCtxBasedOnView, 
+  selectedChildNodeData
+} from './utils';
+import {
+  underlayingNodeInput
+} from './nodeToolbarUtils';
 
 const defaultChildName = 'Child node';
 
@@ -48,27 +55,7 @@ export default (data) => ({
         })
       ]),
 
-      h('label', {}, [
-        'underlaying node',
-        h(
-          'select', 
-          {on: {change: e => thisModel.changeUnderlayingNode({
-              newUnderlayingNodeId: e.target.value
-          })}},
-          [
-            h('option', {props: {
-              value: undefined,
-              selected: !ctx.loadedGraph[nodeData.link]
-            }}, 'None'),
-            ...getAllNodes(ctx).map(({name, id}) => h('option', {
-              props: {
-                value: id,
-                selected: nodeData.link === id
-              }
-            }, name))
-          ]
-        )
-      ]),
+      underlayingNodeInput({thisModel, ctx, selectedNodeData: nodeData}),
 
       h('input', {
         props: {type: 'button', value: 'Delete local node'},
