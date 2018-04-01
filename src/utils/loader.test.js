@@ -1,8 +1,5 @@
 import {fromJson, toJson} from './loader';
 
-import graph1 from './../graph.json';
-import graph2 from './../graph2.json';
-
 const idGenerator = () => {
   let nextId = 0;
   return () => "id" + nextId++;

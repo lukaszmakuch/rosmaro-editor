@@ -1,5 +1,5 @@
 import {updateCtxBasedOnView, runLayout, clearView} from './utils';
-const h = require('snabbdom/h').default;
+import h from './html';
 import getId from 'uuid/v1';
 
 const defaultType = 'leaf';

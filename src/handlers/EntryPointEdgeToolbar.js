@@ -1,4 +1,4 @@
-const h = require('snabbdom/h').default;
+import h from './html';
 import {getEdge} from './utils';
 import {
   changeSelectedEdgeEntryPoint, 

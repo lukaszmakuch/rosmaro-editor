@@ -1,4 +1,4 @@
-const h = require('snabbdom/h').default;
+import h from './html';
 import cytoscapeConfig from './../cytoscapeConfig';
 import cytoscape from 'cytoscape';
 import edgehandles from 'cytoscape-edgehandles';

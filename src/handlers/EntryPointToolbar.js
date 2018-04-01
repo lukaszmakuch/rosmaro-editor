@@ -1,5 +1,5 @@
 import {updateCtxBasedOnView, runLayout} from './utils';
-const h = require('snabbdom/h').default;
+import h from './html';
 
 const defaultName = 'Entry point';
 

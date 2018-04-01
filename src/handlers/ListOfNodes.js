@@ -1,4 +1,4 @@
-const h = require('snabbdom/h').default;
+import h from './html';
 import {getAllNodes, runLayout, clearView} from './utils';
 import cloneDeep from 'lodash/cloneDeep';
 

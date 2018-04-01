@@ -1,5 +1,5 @@
 import getId from 'uuid/v1';
-const h = require('snabbdom/h').default;
+import h from './html';
 import {updateCtxBasedOnView, runLayout} from './utils';
 
 export const typeNewChildNodeName = ({ctx, name}) => {

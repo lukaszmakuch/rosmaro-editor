@@ -1,5 +1,5 @@
 import {fromJson} from './../utils/loader';
-const h = require('snabbdom/h').default;
+import h from './html';
 import getId from 'uuid/v1';
 
 export default (data, msg = () => "") => ({

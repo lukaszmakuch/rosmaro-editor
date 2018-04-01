@@ -1,8 +1,10 @@
 import makeStorage from 'rosmaro-in-memory-storage';
 import makeLock from 'rosmaro-process-wide-lock';
 import rosmaro from 'rosmaro';
+import {denyUnlessSigned} from 'snabbdom-signature';
 const snabbdom = require('snabbdom');
 const patch = snabbdom.init([
+  denyUnlessSigned,
   require('snabbdom/modules/class').default,
   require('snabbdom/modules/props').default,
   require('snabbdom/modules/attributes').default,
