@@ -226,7 +226,7 @@ const fromJsonInnerFn = (
     const builtChildren = buildChildren(
       json,
       getId,
-      [nodeJson.nodeTemplate],
+      [nodeJson.child],
       builtSoFar
     );
 
@@ -238,7 +238,7 @@ const fromJsonInnerFn = (
         [id]: {
           name: node,
           type: 'dynamicComposite',
-          link: builtChildren.ids[nodeJson.nodeTemplate]
+          link: builtChildren.ids[nodeJson.child]
         }
       },
       ids: {
@@ -355,7 +355,7 @@ const dynamicCompositeToJson = (dataset, id) => {
   return {
     [nodeName(dataset, id)]: {
       type: "dynamicComposite",
-      nodeTemplate: dataset[dataset[id].link].name
+      child: dataset[dataset[id].link].name
     }
   };
 };

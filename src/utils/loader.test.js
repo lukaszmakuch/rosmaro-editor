@@ -34,7 +34,7 @@ describe('loader', () => {
 
       'A': {
         type: 'dynamicComposite',
-        nodeTemplate: 'DynamicChild'
+        child: 'DynamicChild'
       },
 
       'DynamicChild': {type: 'leaf'},
