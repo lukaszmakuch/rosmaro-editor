@@ -72,6 +72,22 @@ const fromJsonInnerFn = (
     });
   }
 
+  if (nodeJson.type === 'external') {
+    if (alreadyBuilt(builtSoFar, node)) return builtSoFar;
+    const id = getId();
+    return mergeRes(builtSoFar, {
+      graph: {
+        [id]: {
+          name: node,
+          type: 'external'
+        }
+      },
+      ids: {
+        [node]: id
+      }
+    });
+  }
+
   if (nodeJson.type === 'graph') {
     const builtChildren = buildChildren(
       json,
@@ -302,6 +318,14 @@ const leafToJson = (dataset, id) => {
   };
 };
 
+const externalToJson = (dataset, id) => {
+  return {
+    [nodeName(dataset, id)]: {
+      type: "external"
+    }
+  };
+};
+
 const graphElements = (dataset, id) => {
   const nodeData = dataset[id];
   return JSON.parse(nodeData.data);
@@ -342,6 +366,7 @@ const nodeToJson = (dataset, id) => {
   if (type === 'leaf') return leafToJson(dataset, id);
   if (type === 'composite') return compositeToJson(dataset, id);
   if (type === 'dynamicComposite') return dynamicCompositeToJson(dataset, id);
+  if (type === 'external') return externalToJson(dataset, id);
 };
 
 export const toJson = dataset => {

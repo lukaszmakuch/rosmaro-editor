@@ -139,25 +139,37 @@
       "GraphView": "GraphView"
     }
   },
+  "ChildNodeToolbarView": {
+    "type": "leaf"
+  },
   "ChildNodeToolbar": {
     "type": "graph",
     "nodes": {
       "ChildNodeToolbarView": "ChildNodeToolbarView"
     },
-    "entryPoints": {
-      "history": {"target": "recent", "entryPoint": "history"},
-      "start": {"target": "ChildNodeToolbarView", "entryPoint": "start"}
-    },
     "arrows": {
       "ChildNodeToolbarView": {
-        "changed underlaying node": {"target": "ChildNodeToolbarView", "entryPoint": "start"},
-        "typed node name": {"target": "ChildNodeToolbarView", "entryPoint": "start"}
+        "changed underlaying node": {
+          "target": "ChildNodeToolbarView",
+          "entryPoint": "start"
+        },
+        "typed node name": {
+          "target": "ChildNodeToolbarView",
+          "entryPoint": "start"
+        }
+      }
+    },
+    "entryPoints": {
+      "history": {
+        "target": "recent",
+        "entryPoint": "history"
+      },
+      "start": {
+        "target": "ChildNodeToolbarView",
+        "entryPoint": "start"
       }
     }
   },
-
-  "ChildNodeToolbarView": {"type": "leaf"},
-
   "ChildNodeEditor": {
     "type": "composite",
     "nodes": {
@@ -657,6 +669,45 @@
       "DynamicCompositeEditorUI": "DynamicCompositeEditorUI"
     }
   },
+  "ExternalToolbarView": {
+    "type": "leaf"
+  },
+  "ExternalToolbar": {
+    "type": "graph",
+    "nodes": {
+      "ExternalToolbarView": "ExternalToolbarView"
+    },
+    "arrows": {
+      "ExternalToolbarView": {
+        "changed node name": {
+          "target": "ExternalToolbarView",
+          "entryPoint": "start"
+        },
+        "changed underlaying node": {
+          "target": "ExternalToolbarView",
+          "entryPoint": "start"
+        }
+      }
+    },
+    "entryPoints": {
+      "history": {
+        "target": "recent",
+        "entryPoint": "start"
+      },
+      "start": {
+        "target": "ExternalToolbarView",
+        "entryPoint": "start"
+      }
+    }
+  },
+  "EditingExternal": {
+    "type": "composite",
+    "nodes": {
+      "GraphView": "GraphView",
+      "Toolbar": "ExternalToolbar",
+      "NodeList": "ListOfNodes"
+    }
+  },
   "EditorUIBottomLayerView": {
     "type": "graph",
     "nodes": {
@@ -666,7 +717,8 @@
       "AddingNode": "AddingNode",
       "EditingLeaf": "EditingLeaf",
       "EditingComposite": "EditingComposite",
-      "EditingDynamicComposite": "EditingDynamicComposite"
+      "EditingDynamicComposite": "EditingDynamicComposite",
+      "EditingExternal": "EditingExternal"
     },
     "arrows": {
       "InitializingGraph": {
@@ -706,6 +758,12 @@
           "target": "EditingLeaf",
           "entryPoint": "start"
         }
+      },
+      "EditingExternal": {
+        "clicked background": {
+          "target": "EditingExternal",
+          "entryPoint": "start"
+        }
       }
     },
     "entryPoints": {
@@ -740,6 +798,10 @@
       "editing graph": {
         "target": "EditingGraph",
         "entryPoint": "start"
+      },
+      "editing external": {
+        "target": "EditingExternal",
+        "entryPoint": "start"
       }
     }
   },
@@ -773,6 +835,10 @@
         "opened dynamicComposite": {
           "target": "EditorUIBottomLayerView",
           "entryPoint": "editing dynamicComposite"
+        },
+        "opened external": {
+          "target": "EditorUIBottomLayerView",
+          "entryPoint": "editing external"
         }
       }
     },

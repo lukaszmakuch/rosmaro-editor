@@ -16,6 +16,7 @@ import EdgeAdder from './EdgeAdder';
 import EntryPointToolbar from './EntryPointToolbar';
 import NewNodeToolbar from './NewNodeToolbar';
 import RenameLeaf from './RenameLeaf';
+import ExternalToolbarView from './ExternalToolbarView';
 import CompositeItselfToolbar from './CompositeItselfToolbar';
 import NewCompositeChildToolbar from './NewCompositeChildToolbar';
 import CompositeEdgeHandler from './CompositeEdgeHandler';
@@ -33,12 +34,14 @@ export default data => ({
   RenameLeaf: RenameLeaf(data),
   NoNodeSelected: Editor(data),
   InitializingGraph: Editor(data),
+  ExternalToolbarView: ExternalToolbarView(data),
   EditingGraphItself: Editor(data),
   DynamicCompositeEditorUI: Editor(data),
   EditingDynamicComposite: EditingDynamicComposite(data),
   EditingComposite: EditingComposite(data),
   EditingChildNode: Editor(data),
   EditingLeaf: Editor(data),
+  EditingExternal: Editor(data),
   EditingEntryPoint: Editor(data),
   AddingNodeScreen: Editor(data),
   EditingEntryPointEdge: Editor(data),

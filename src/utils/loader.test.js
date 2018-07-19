@@ -65,7 +65,7 @@ describe('loader', () => {
       },
 
       'BSubA': {type: 'leaf'},
-      'BSubB': {type: 'leaf'}
+      'BSubB': {type: 'external'}
     };
 
     const editorFormat = {
@@ -84,7 +84,7 @@ describe('loader', () => {
     },
     "id3": {
       "name": "BSubB",
-      "type": "leaf"
+      "type": "external"
     },
     "id4": {
       "name": "BSub",

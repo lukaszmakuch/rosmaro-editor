@@ -8,6 +8,7 @@ export default (data) => ({
     const selectedNodeType = ctx.loadedGraph[nodeId].type;
     const arrow = ({
       'leaf': 'opened leaf',
+      'external': 'opened external',
       'graph': 'opened graph',
       'composite': 'opened composite',
       'dynamicComposite': 'opened dynamicComposite'
