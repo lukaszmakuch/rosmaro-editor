@@ -1,6 +1,6 @@
 {
   "name": "rosmaro-editor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A visual editor for Rosmaro",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "jest": "^22.4.0",
+    "jest": "^23.6.0",
     "regenerator-runtime": "^0.12.1",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.10.0",
