@@ -1,22 +1,24 @@
 {
-  "name": "rosmaro-online-editor",
-  "version": "0.0.2",
+  "name": "rosmaro-editor",
+  "version": "0.0.3",
   "description": "A visual editor for Rosmaro",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack --config webpack.prod.js",
-    "start": "npx webpack --watch --config webpack.dev.js",
-    "test": "./node_modules/.bin/jest "
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack --watch --config webpack.dev.js",
+    "test": "jest --watch"
   },
   "author": "Łukasz Makuch",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "jest": "^22.4.0",
+    "regenerator-runtime": "^0.12.1",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.1"
@@ -24,12 +26,12 @@
   "dependencies": {
     "cytoscape": "^3.2.7",
     "cytoscape-edgehandles": "^3.0.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "rosmaro": "^0.2.0",
     "rosmaro-in-memory-storage": "^1.0.0",
     "rosmaro-process-wide-lock": "^1.0.0",
     "snabbdom": "^0.7.1",
-    "snabbdom-signature": "0.0.1",
+    "snabbdom-signature": "0.0.2",
     "uuid": "^3.1.0"
   }
 }
