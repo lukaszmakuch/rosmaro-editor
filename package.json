@@ -1,6 +1,6 @@
 {
   "name": "rosmaro-editor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A visual editor for Rosmaro",
   "main": "index.js",
   "scripts": {

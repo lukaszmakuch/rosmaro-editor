@@ -33,16 +33,18 @@ export default (data) => ({
     h('div.header', {}, [
       h('h1', {}, 'Rosmaro nodes'),
     ]),
-    h('ul.nodes', {}, getAllNodes(ctx).map(({id, name}) => 
-      h(
-        'li', 
-        {
-          class: {active: ctx.openedNode === id},
-          on: {click: () => thisModel.handleNodeSelect({nodeId: id})}
-        },
-        name
-      )
-    )),
+    h('ul.nodes', [
+      h('ul.nodes__list', {}, getAllNodes(ctx).map(({id, name}) => 
+        h(
+          'li.nodes__list-item', 
+          {
+            class: {active: ctx.openedNode === id},
+            on: {click: () => thisModel.handleNodeSelect({nodeId: id})}
+          },
+          name
+        )
+      ))
+    ]),
     h('div.ctrl-buttons', {}, [
       h('input', {
         props: {type: 'button', value: 'add node'},
